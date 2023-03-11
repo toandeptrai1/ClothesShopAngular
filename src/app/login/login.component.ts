@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
   login(user:User){
     this.userService.login(user).subscribe(user => {
       if(user){
-        this.storage.store("userName",user.userName);
-        this.router.navigate(["/"]);
-       
+
+        this.router.navigate(["/home"]);
+
         this.toastr.success('Login Successfully!');
       }else{
         this.toastr.error('Login Failed!');

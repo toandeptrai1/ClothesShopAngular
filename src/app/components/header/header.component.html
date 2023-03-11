@@ -4,7 +4,7 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand waves-effect" href="#" >
+      <a class="navbar-brand waves-effect" routerLink="/home" >
         <strong class="blue-text">My Shop</strong>
       </a>
 
@@ -19,8 +19,8 @@
 
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link waves-effect" href="#">Home
+          <li class="nav-item ">
+            <a class="nav-link waves-effect"routerLink="/home">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -30,8 +30,8 @@
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
-            <a class="nav-link waves-effect">
-              <span class="badge red z-depth-1 mr-1"> 1 </span>
+            <a class="nav-link waves-effect" routerLink="/cartdetail">
+              <span class="badge red z-depth-1 mr-1" *ngIf="cartItems$|async as cartItems"> {{cartItems.length}}</span>
               <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Cart </span>
             </a>
@@ -45,13 +45,13 @@
 
 
       </div>
-      <div class="btn-group" *ngIf="userName">
+      <div class="btn-group" *ngIf="user">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-         {{userName}}
+         {{user.userName}}
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-          <button class="dropdown-item" type="button">Profile</button>
-          <button class="dropdown-item" type="button">Logout</button>
+          <button class="dropdown-item" type="button"(click)="navigateProfie()">Profile</button>
+          <button class="dropdown-item" type="button" (click)="logout()">Logout</button>
         </div>
       </div>
 

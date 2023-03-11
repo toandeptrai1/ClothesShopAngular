@@ -14,6 +14,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CartDetailComponent } from './cart-detail/cart-detail.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +29,11 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     CartComponent,
     LoginComponent,
     SignUpComponent,
+    PaginatorComponent,
+    ProductDetailComponent,
+    ProfileComponent,
+    CartDetailComponent,
+    CheckoutComponent,
 
   ],
   imports: [

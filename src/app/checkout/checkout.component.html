@@ -1,0 +1,180 @@
+
+  <!--Main layout-->
+  <main class="mt-5 pt-4">
+    <div class="container wow fadeIn">
+
+      <!-- Heading -->
+      <h2 class="my-5 h2 text-center">Checkout form</h2>
+
+      <!--Grid row-->
+      <div class="row">
+
+        <!--Grid column-->
+        <div class="col-md-8 mb-4">
+
+          <!--Card-->
+          <div class="card">
+
+            <!--Card content-->
+            <form class="card-body" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+
+              <!--Grid row-->
+              <div class="row">
+
+                <!--Grid column-->
+                <div class="col-md-12 mb-2">
+
+                  <!--firstName-->
+                  <div class="md-form ">
+                    <input type="text" id="firstName" formControlName="fullName" placeholder="full name" class="form-control">
+                    <p class="text-danger" *ngIf="(checkoutForm.get('fullName').touched||submitted)&&checkoutForm.get('fullName').errors">
+                      This field is required !
+                    </p>
+
+                  </div>
+
+                </div>
+                <!--Grid column-->
+
+
+              </div>
+              <!--Grid row-->
+
+
+
+
+              <!--email-->
+              <div class="md-form mb-5">
+                <input type="text" id="email" class="form-control" formControlName="email" placeholder="youremail@example.com">
+                <p class="text-danger" *ngIf="(checkoutForm.get('email').touched||submitted)&&checkoutForm.get('email').errors?.['required']">
+                  This field is required !
+                </p>
+                <p class="text-danger" *ngIf="(checkoutForm.get('email').touched||submitted)&&checkoutForm.get('email').errors?.['email']">
+                  This field is invalid !
+                </p>
+
+              </div>
+
+              <!--address-->
+              <div class="md-form mb-5">
+                <input type="text" id="address" class="form-control"formControlName="phone" placeholder="phone">
+                <p class="text-danger" *ngIf="(checkoutForm.get('phone').touched||submitted)&&checkoutForm.get('phone').errors">
+                  This field is required !
+                </p>
+
+              </div>
+
+
+
+
+
+              <!--Grid row-->
+              <div class="row">
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4" *ngIf="provinces$|async as provinces">
+
+                  <label for="country">Province</label>
+                  <select class="custom-select d-block w-100" id="country" required (change)="provinceChange($event)" formControlName="province">
+                    <option disabled selected hidden >Choose...</option>
+                    <option *ngFor="let province of provinces" [value]="province.code">{{province.name}}</option>
+                  </select>
+                  <p class="text-danger"*ngIf="(checkoutForm.get('province').touched||submitted)&&checkoutForm.get('province').errors">
+                    This field is required !
+                  </p>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4" >
+
+                  <label for="state">District</label>
+                  <select formControlName="district" class="custom-select d-block w-100" id="state" required  (change)="getWards($event)">
+                    <option  disabled selected hidden >Choose...</option>
+                    <option *ngFor="let district of ((province$|async)?.districts)"  [value]="district.code">{{district.name}}</option>
+                  </select>
+                  <p class="text-danger" *ngIf="(checkoutForm.get('district').touched||submitted)&&checkoutForm.get('district').errors">
+                    This field is required !
+                  </p>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4">
+
+                  <label for="country">Ward</label>
+                  <select formControlName="ward" class="custom-select d-block w-100" id="country" required>
+                    <option disabled selected hidden>Choose...</option>
+                    <option *ngFor="let ward of (district$|async)?.wards">{{ward.name}}</option>
+                  </select>
+                  <p class="text-danger" *ngIf="(checkoutForm.get('ward').touched||submitted)&&checkoutForm.get('ward').errors">
+                    This field is required !
+                  </p>
+
+                </div>
+                <!--Grid column-->
+
+              </div>
+              <!--Grid row-->
+
+
+
+
+
+
+
+
+
+
+              <hr class="mb-4">
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+
+            </form>
+
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-4 mb-4">
+
+          <!-- Heading -->
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Your cart</span>
+            <span class="badge badge-secondary badge-pill">{{(carts$|async).length}}</span>
+          </h4>
+
+          <!-- Cart -->
+          <ul class="list-group mb-3 z-depth-1" *ngIf="carts$|async as carts">
+            <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let cart of carts">
+              <div>
+                <h6 class="my-0">{{cart.productName}} &nbsp;x{{cart.quantity}} </h6>
+
+              </div>
+              <span class="text-muted">${{cart.totalPrice}}</span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between">
+
+              <span>Total (USD)</span>
+              <strong>${{totalPrice$|async}}</strong>
+            </li>
+          </ul>
+          <!-- Cart -->
+
+
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+  <!--Main layout-->

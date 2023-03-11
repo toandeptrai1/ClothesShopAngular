@@ -8,9 +8,9 @@ import { UserService } from './service/user.service';
 })
 export class AppComponent {
   title = 'ClothesShop';
-  userName:string="";
+  
   constructor(private userService:UserService){
-    this.userName=userService.getCurrentUser();
+
   }
 
 }

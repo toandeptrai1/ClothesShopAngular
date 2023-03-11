@@ -1,0 +1,76 @@
+<div class="container">
+  <ng-container>
+    <div class=" row mt-5 " *ngIf="cart$|async as carts; else cartemty">
+      <div class="card mt-5">
+        <div class="row">
+            <div class="col-md-8 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                        <div class="col align-self-center text-right text-muted">{{carts.length}} items</div>
+                    </div>
+                </div>
+                <div class="row border-top border-bottom" *ngFor="let cart of carts">
+                    <div class="row main align-items-center ">
+                        <div class="col-2"><img class="img-fluid" src="{{cart.image}}"></div>
+                        <div class="col">
+                            <div class="row text-muted">{{cart.category.categoryName}}</div>
+                            <div class="row">{{cart.productName}}</div>
+                        </div>
+                        <div class="col">
+
+                              <input type="number" class="mb-0 w-50" value="{{cart.quantity}}" min="1"(change)="updateCartitem(cart,$event)"  (keyup)="updateCartitem(cart,$event)"/>
+
+                        </div>
+                        <div class="col">&euro; {{cart.price}} <button class="close" (click)="removeCartItem(cart)">&#10005;</button></div>
+                    </div>
+                </div>
+
+
+                <div class="back-to-shop"><a routerLink="/home">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+            </div>
+            <div class="col-md-4 summary">
+                <div><h5><b>Summary</b></h5></div>
+                <hr>
+                <div class="row">
+                    <div class="col" style="padding-left:0;">ITEMS {{carts.length}}</div>
+                    <div class="col text-right">&euro; {{totalPrice$|async}}</div>
+                </div>
+
+                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                    <div class="col">TOTAL PRICE</div>
+                    <div class="col text-right">&euro; {{totalPrice$|async}}</div>
+                </div>
+                <button class="btn" routerLink="/checkout">CHECKOUT</button>
+            </div>
+        </div>
+
+
+      </div>
+
+    </div>
+    <ng-template  #cartemty>    <div class=" row mt-5 " >
+      <div class="card mt-5">
+        <div class="row">
+            <div class="col-md-12 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col"><h4><b>Shopping Cart</b></h4></div>
+
+                    </div>
+                </div>
+                <p>Không có sản  phẩm nào !</p>
+
+
+                <div class="back-to-shop"><a routerLink="/home">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+            </div>
+
+        </div>
+
+
+      </div>
+
+    </div></ng-template>
+
+  </ng-container>
+</div>
